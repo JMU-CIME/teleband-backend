@@ -90,10 +90,12 @@ class StudentsController < ApplicationController
     end
 
     def profile 
-        payload = request.headers["Authentication"]
-        student = Student.find_by(school_id: payload)
-    
-        render json: student.to_json(
+        token = request.headers["Authentication"]
+        payload = decode(token)
+        student = Student.find_by(school_id: payload["student"])
+        student_hash = student.as_json
+        student_hash["token"] = payload
+        render json: student_hash.to_json(
             :except => [:created_at, :updated_at],
             :include => [:student_assignments => 
             {:except => 

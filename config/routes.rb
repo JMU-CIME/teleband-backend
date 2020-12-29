@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :assignments
   resources :students
   resources :teachers
+  #https://medium.com/analytics-vidhya/log-in-with-jwt-authentication-in-rails-and-react-a3dddd7f934
   post '/login', to: 'auth#create'
+  # post '/login', to: 'auth#token_auth' # not needed bc they're in teacher and student
   post '/students/:teacher_id/classlist', to: 'students#import_classlist'
   get '/teacher/profile', to: 'teachers#profile'
   get '/student/profile', to: 'students#profile'
