@@ -6,7 +6,7 @@ class AuthController < ApplicationController
             if student
                 payload = {student_id: student.id}
                 token = encode(payload)
-                render json: student.to_json(
+                serialized_student = student.to_json(
                     :except => [:created_at, :updated_at],
                     :include => [:student_assignments => 
                     {:except => 
@@ -16,11 +16,15 @@ class AuthController < ApplicationController
                     {:except =>[ :created_at, :updated_at] 
                     }]}]
                 )
+                render json: {
+                    profile: serialized_student,
+                    token: token
+                }
             else
                 render json: {
-                error: true,
-                message: "Student does not exist"
-            }
+                    error: true,
+                    message: "Student does not exist"
+                }
             end
         else
             teacher = Teacher.find_by(email: params["email"])
@@ -42,10 +46,10 @@ class AuthController < ApplicationController
         end
     end
 
-    def token_auth
-        token = request.headers["Authentication"]
-        teacher = Teacher.find(email: decode(token)["teacher_id"])
-        render json: user
-    end
+    # def token_auth
+    #     token = request.headers["Authentication"]
+    #     teacher = Teacher.find(email: decode(token)["teacher_id"])
+    #     render json: user
+    # end
 
 end
