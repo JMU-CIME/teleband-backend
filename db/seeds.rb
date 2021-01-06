@@ -21,7 +21,7 @@ ann = Teacher.create(name: "Ann", email: "ann@gmail.com", password: "s")
 # concert_band = Course.create(name: "Concert Band")
 
 lauren = Student.create(teacher: shewan, school_id:"123456789", name: "Lauren Y", grade:10)
-matteo = Student.create(teacher: ann, school_id:"8765309", name: "Matteo R", grade:10)
+matteo = Student.create(teacher: ann, school_id:"8675309", name: "Matteo R", grade:10)
 wesley = Student.create(teacher: shewan, school_id:"00000000", name: "Wesley C", grade:10)
 chris = Student.create(teacher: shewan, school_id:"1111111", name: "Chris Z", grade:10)
 tyrion = Student.create(teacher: ann, school_id:"22222222", name: "Tyrion", grade:10)
