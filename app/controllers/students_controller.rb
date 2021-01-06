@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
     end
 
     def create
-        student = Student.new(school_id: params[:school_id], teacher_id: params[:teacher_id], name: params[:name], grade: params[:grade], classes: "")
+        student = Student.new(school_id: params[:school_id], teacher_id: params[:teacher_id], name: params[:name], grade: params[:grade])
         if student.valid?
             student.save
             assignments = Assignment.all
@@ -46,7 +46,7 @@ class StudentsController < ApplicationController
         csv_file = params[:csv].tempfile
         new_students = CSV.read(csv_file)
         addedStudents = new_students.map do |student|
-            student = Student.new(school_id: "", teacher_id: params[:teacher_id], name: student[0], grade: student[1], classes: "")
+            student = Student.new(school_id: "", teacher_id: params[:teacher_id], name: student[0], grade: student[1])
             student.update(school_id: student.getRandomId)
             if student.valid?
                 student.save
