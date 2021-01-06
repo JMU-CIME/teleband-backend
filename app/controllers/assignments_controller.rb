@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
     include Rails.application.routes.url_helpers
-
+    before_action :auth_request
     def index 
         assignments = Assignment.all 
         render json: assignments

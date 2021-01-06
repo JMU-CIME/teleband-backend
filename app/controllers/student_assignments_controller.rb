@@ -1,4 +1,6 @@
 class StudentAssignmentsController < ApplicationController
+    # is_teacher = true
+    before_action :auth_request
     
     def index
         student_assignments = StudentAssignment.all

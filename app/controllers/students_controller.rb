@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
     require 'csv'
+    before_action :auth_request
 
     def index
         students = Student.all

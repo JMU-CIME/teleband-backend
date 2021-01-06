@@ -13,11 +13,11 @@ class ApplicationController < ActionController::API
         JWT.decode(token, secret_key, true, {algorithm: "HS256"})[0]
     end
 
-    def auth_request(request, is_teacher)
+    def auth_request
         begin
             token = request.headers["Authentication"]
             payload = decode(token)
-            if is_teacher
+            if Teacher.exists?(payload["teacher_id"])
                 @current_user = Teacher.find(payload["teacher_id"])
             else
                 @current_user = Student.find_by(school_id: payload["student_id"])
