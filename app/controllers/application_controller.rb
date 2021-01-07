@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
             if Teacher.exists?(payload["teacher_id"])
                 @current_user = Teacher.find(payload["teacher_id"])
             else
-                @current_user = Student.find_by(school_id: payload["student_id"])
+                @current_user = Student.find(payload["student_id"])
             end
         rescue ActiveRecord::RecordNotFound => e
             render json: { errors: e.message }, status: :unauthorized

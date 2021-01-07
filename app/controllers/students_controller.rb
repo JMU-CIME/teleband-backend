@@ -93,7 +93,7 @@ class StudentsController < ApplicationController
     def profile 
         token = request.headers["Authentication"]
         payload = decode(token)
-        student = Student.find_by(school_id: payload["student_id"])
+        student = Student.find(payload["student_id"])
         student_hash = student.as_json
         # student_hash["token"] = payload
         render json: student_hash.to_json(
